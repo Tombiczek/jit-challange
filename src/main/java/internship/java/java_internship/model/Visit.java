@@ -3,15 +3,14 @@ package internship.java.java_internship.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Visit {
 
     private @Id
     @GeneratedValue Long id;
-    private LocalDate dateVisit;
+    private LocalDateTime dateVisit;
     private String owner;
     private String catName;
     private int catAge;
@@ -20,7 +19,7 @@ public class Visit {
 
     public Visit() {}
 
-    public Visit(LocalDate dateVisit, String owner, String catName, int catAge, String catColor) {
+    public Visit(LocalDateTime dateVisit, String owner, String catName, int catAge, String catColor) {
         this.dateVisit = dateVisit;
         this.owner = owner;
         this.catName = catName;
@@ -36,11 +35,11 @@ public class Visit {
         this.id = id;
     }
 
-    public LocalDate getDateVisit() {
+    public LocalDateTime getDateVisit() {
         return dateVisit;
     }
 
-    public void setDateVisit(LocalDate dateVisit) {
+    public void setDateVisit(LocalDateTime dateVisit) {
         this.dateVisit = dateVisit;
     }
 

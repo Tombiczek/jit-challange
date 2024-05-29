@@ -5,6 +5,7 @@ import internship.java.java_internship.model.Visit;
 import internship.java.java_internship.model.VisitRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -16,6 +17,10 @@ public class VisitController {
     public VisitController(VisitRepository visitRepository) {
         this.visitRepository = visitRepository;
     }
+
+    LocalTime startTime = LocalTime.parse("08:00:00");
+    LocalTime endTime = LocalTime.parse("16:00:00");
+
 
     @GetMapping("/visits")
     public List<Visit> all() {
@@ -30,6 +35,16 @@ public class VisitController {
 
     @PostMapping()
     public Visit addVisit(@RequestBody Visit newVisit) {
+        List<Visit> visits = visitRepository.findAll();
+        for (Visit visit : visits) {
+            if (visit.getDateVisit().equals(newVisit.getDateVisit())) {
+                return null;
+            }
+        }
+        if(!newVisit.getDateVisit().toLocalTime().isBefore(startTime) &&
+                !newVisit.getDateVisit().toLocalTime().isAfter(endTime)) {
+            return null;
+        }
         return visitRepository.save(newVisit);
     }
 
@@ -54,8 +69,4 @@ public class VisitController {
     public void deleteVisit(@RequestBody Visit visit) {
         visitRepository.delete(visit);
     }
-
-//    public Visit checkDate(@PathVariable Date dateVisit) {
-//
-//    }
 }

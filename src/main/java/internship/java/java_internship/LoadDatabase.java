@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Configuration
@@ -20,9 +20,9 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(VisitRepository repository) {
         return args -> {
             log.info("Preloading {}", repository.save(new Visit(
-                    LocalDate.parse("2025-05-05"), "Tomasz", "Puszek", 5, "Czarny")));
+                    LocalDateTime.parse("2025-05-05T11:00:00"), "Tomasz", "Puszek", 5, "Czarny")));
             log.info("Preloading {}", repository.save(new Visit(
-                    LocalDate.parse("2025-02-12"), "Michal", "Kotek", 2, "Bialy")));
+                    LocalDateTime.parse("2025-02-12T14:00:00"), "Michal", "Kotek", 2, "Bialy")));
         };
     }
 }
